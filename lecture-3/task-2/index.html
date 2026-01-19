@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Lecture 3 - Hometask 2</title>
+  </head>
+  <body>
+    <main>
+      <div class="hero">
+        <h1 class="hero__title">Rick and Morty</h1>
+      </div>
+      <div class="characters">
+        <div class="loading"><span class="loading__text">Loading...</span></div>
+        <div id="characters-list" class="characters-list"></div>
+      </div>
+      <div class="pagination">
+        <button
+          data-action="pagination"
+          data-pagination-type="prev"
+          class="button pagination__button"
+          disabled
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M10 12L6 8L10 4" stroke="currentColor" />
+          </svg>
+        </button>
+        <span class="pagination__page-counter">1</span>
+        <button
+          data-action="pagination"
+          data-pagination-type="next"
+          class="button pagination__button"
+          disabled
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M10 12L6 8L10 4" stroke="currentColor" />
+          </svg>
+        </button>
+      </div>
+    </main>
+
+    <script src="index.js"></script>
+  </body>
+</html>

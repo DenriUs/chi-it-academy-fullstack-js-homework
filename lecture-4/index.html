@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Lecture 4 - Hometask</title>
+  </head>
+  <body>
+    <main>
+      <div id="character-modal" class="modal hidden">
+        <div data-action="character-modal-close" class="modal__overlay"></div>
+        <div class="modal__card card">
+          <div class="modal__content"></div>
+          <div class="modal__actions">
+            <button data-action="character-modal-close" class="button">Close</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero">
+        <h1 class="hero__title">Rick and Morty</h1>
+      </div>
+
+      <div class="characters">
+        <div id="characters-list" class="characters-list"></div>
+      </div>
+
+      <span id="loading-sentinel"></span>
+      <div id="loading" class="loading"><span class="loading__text">Loading...</span></div>
+    </main>
+
+    <script src="index.js"></script>
+  </body>
+</html>

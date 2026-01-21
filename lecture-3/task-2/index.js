@@ -46,7 +46,7 @@ const renderCharactersList = (characters) => {
               </div>
               <div class="character__location">
                 <p class="character__label">Location:</p>
-                <span class="character__text">${character.origin.name}</span>
+                <span class="character__text">${character.location.name}</span>
               </div>
             </div>
           </div>

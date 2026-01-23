@@ -1,0 +1,19 @@
+.counter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #000000;
+  border-radius: 0.75rem;
+}
+
+.counter__title {
+  font-size: 2rem;
+}
+
+.counter__actions {
+  display: flex;
+  gap: 0.5rem;
+}

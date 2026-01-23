@@ -1,0 +1,43 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100dvh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1,
+h2 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: auto;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  height: 100dvh;
+  background-color: #f7f7f7;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  width: auto;
+  justify-content: center;
+  font-size: 1rem;
+  padding: 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid #000;
+  background-color: transparent;
+}

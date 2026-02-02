@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router';
+import { BrowserRouter, HashRouter } from 'react-router';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import GlobalStyles from '@mui/material/GlobalStyles';
@@ -6,6 +6,10 @@ import GlobalStyles from '@mui/material/GlobalStyles';
 import { ThemeProvider } from '@providers/ThemeProvider';
 
 import AppRoutes from './routes';
+
+const PUBLIC_PATH = process.env.PUBLIC_PATH;
+
+const RootRouter = PUBLIC_PATH && PUBLIC_PATH !== '/' ? HashRouter : BrowserRouter;
 
 function App() {
   return (
@@ -53,9 +57,9 @@ function App() {
           },
         }}
       />
-      <BrowserRouter basename={process.env.PUBLIC_PATH || '/'}>
+      <RootRouter basename={PUBLIC_PATH}>
         <AppRoutes />
-      </BrowserRouter>
+      </RootRouter>
     </ThemeProvider>
   );
 }

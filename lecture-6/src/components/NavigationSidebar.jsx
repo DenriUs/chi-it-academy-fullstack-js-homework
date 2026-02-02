@@ -58,7 +58,6 @@ const NavigationSidebar = ({ isMobileOpened, onMobileClose }) => {
       <Drawer
         open={isMobileOpened}
         onClose={onMobileClose}
-        onChange={(event) => console.log(event)}
         variant={isMobile ? 'temporary' : 'permanent'}
         sx={{
           width: { xs: 1, sm: 'var(--sidebar-width)' },

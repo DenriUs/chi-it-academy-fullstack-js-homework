@@ -90,9 +90,6 @@ export default function HeroesPage() {
         disableColumnFilter
         disableColumnMenu
         disableColumnSorting
-        isRowSelectable={(row) => {
-          console.log(row);
-        }}
         initialState={{
           pagination: {
             paginationModel: {

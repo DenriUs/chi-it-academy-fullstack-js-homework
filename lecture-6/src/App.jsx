@@ -7,7 +7,7 @@ import { ThemeProvider } from '@providers/ThemeProvider';
 
 import AppRoutes from './routes';
 
-const PUBLIC_PATH = process.env.PUBLIC_PATH;
+const PUBLIC_PATH = process.env.PUBLIC_PATH ?? '/';
 
 const RootRouter = PUBLIC_PATH && PUBLIC_PATH !== '/' ? HashRouter : BrowserRouter;
 
@@ -57,7 +57,7 @@ function App() {
           },
         }}
       />
-      <RootRouter basename={PUBLIC_PATH}>
+      <RootRouter>
         <AppRoutes />
       </RootRouter>
     </ThemeProvider>

@@ -20,7 +20,7 @@ export default (_env, argv) => {
       path: path.resolve(__dirname, 'dist'),
       filename: '[name].[contenthash].js',
       assetModuleFilename: '[hash].[ext]',
-      publicPath: '/',
+      publicPath: process.env.PUBLIC_PATH || '/',
       clean: true,
     },
     resolve: {

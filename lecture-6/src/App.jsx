@@ -53,7 +53,7 @@ function App() {
           },
         }}
       />
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_PATH || '/'}>
         <AppRoutes />
       </BrowserRouter>
     </ThemeProvider>

@@ -1,6 +1,8 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import webpack from 'webpack';
+
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
@@ -78,6 +80,9 @@ export default (_env, argv) => {
       }),
       new MiniCssExtractPlugin({
         filename: '[name].[contenthash].css',
+      }),
+      new webpack.DefinePlugin({
+        'process.env.PUBLIC_PATH': JSON.stringify(process.env.PUBLIC_PATH || '/'),
       }),
     ],
     optimization: {

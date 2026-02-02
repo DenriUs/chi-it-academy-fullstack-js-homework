@@ -14,7 +14,7 @@ function App() {
       <GlobalStyles
         styles={{
           ':root': {
-            'color-scheme': 'light',
+            colorScheme: 'light',
 
             '--sidebar-width': '280px',
             '--hero-sidebar-width': '450px',
@@ -32,7 +32,7 @@ function App() {
             '--divider': 'rgba(0, 0, 0, 0.12)',
           },
           '.dark': {
-            'color-scheme': 'dark',
+            colorScheme: 'dark',
 
             '--primary': 'rgb(255, 255, 255)',
             '--icon': 'rgb(255, 255, 255)',

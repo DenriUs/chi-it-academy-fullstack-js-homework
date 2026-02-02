@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy React project to GitHub Pages
 
 on:
   workflow_dispatch:
@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-files
-          path: ${{ inputs.folder }}/dist
+          path: ${{ inputs.folder }}/dist/**/*
 
   deploy:
     needs: build

@@ -1,5 +1,5 @@
 import { Outlet, useNavigate } from 'react-router';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import Box from '@mui/material/Box';
 
@@ -32,11 +32,15 @@ export default function HeroesPage() {
   const [dataSetInfo, setDataSetInfo] = useState(null);
 
   const [rowSelectionModel, setRowSelectionModel] = useState({ type: 'include', ids: new Set() });
-  const [rows, setRows] = useState(
-    Array.from({ length: ROWS_PER_PAGE }, (_, index) => ({ id: index })),
-  );
 
   const { data, isLoading } = useHeroes(currentPage, 150);
+
+  const rows = useMemo(() => {
+    if (!data) {
+      return Array.from({ length: ROWS_PER_PAGE }, (_, index) => ({ id: index }));
+    }
+    return data.results.map(({ id, name, status }) => ({ id, name, status }));
+  }, [data]);
 
   const navigate = useNavigate();
 
@@ -58,10 +62,8 @@ export default function HeroesPage() {
 
   useEffect(() => {
     if (isLoading) return;
-    const rows = data.results.map(({ id, name, status }) => ({ id, name, status }));
-    setRows(rows);
     setDataSetInfo(data.info);
-  }, [data]);
+  }, [isLoading, data]);
 
   return (
     <Box
@@ -88,6 +90,9 @@ export default function HeroesPage() {
         disableColumnFilter
         disableColumnMenu
         disableColumnSorting
+        isRowSelectable={(row) => {
+          console.log(row);
+        }}
         initialState={{
           pagination: {
             paginationModel: {

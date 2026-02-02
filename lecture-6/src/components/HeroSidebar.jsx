@@ -4,7 +4,6 @@ import { useNavigate, useOutletContext, useParams } from 'react-router';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Toolbar from '@mui/material/Toolbar';
-import Skeleton from '@mui/material/Skeleton';
 
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
@@ -16,6 +15,7 @@ import useIsMobile from '@hooks/useIsMobile';
 import Drawer from '@components/ui/Drawer';
 import SwipeableDrawer from '@components/ui/SwipeableDrawer';
 import Divider from '@components/ui/Divider';
+import Skeleton from '@components/ui/Skeleton';
 import Typography from '@components/ui/Typography';
 import IconButton from '@components/ui/IconButton';
 
@@ -30,7 +30,7 @@ const HeroSidebar = () => {
 
   const { heroId } = useParams();
 
-  const { data, isLoading } = useHero(heroId, 300);
+  const { data, isLoading } = useHero(heroId, 150);
 
   const { removeHeroRowSelection } = useOutletContext();
 

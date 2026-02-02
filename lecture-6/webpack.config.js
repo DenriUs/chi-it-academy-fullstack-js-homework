@@ -18,8 +18,8 @@ export default (_env, argv) => {
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'src/main/[name].[contenthash].js',
-      assetModuleFilename: 'src/assets/[hash].[ext]',
+      filename: '[name].[contenthash].js',
+      assetModuleFilename: '[hash].[ext]',
       publicPath: '/',
       clean: true,
     },
@@ -77,7 +77,7 @@ export default (_env, argv) => {
         template: './public/index.html',
       }),
       new MiniCssExtractPlugin({
-        filename: 'src/styles/[name].[contenthash].css',
+        filename: '[name].[contenthash].css',
       }),
     ],
     optimization: {

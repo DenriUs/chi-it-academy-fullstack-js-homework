@@ -2,18 +2,27 @@ import { Outlet, useNavigate } from 'react-router';
 import { useEffect, useMemo, useState } from 'react';
 
 import Box from '@mui/material/Box';
-import { GridRowParams, GridRowSelectionModel } from '@mui/x-data-grid';
+import {
+  GridColDef,
+  GridRowParams,
+  GridRowSelectionModel,
+  GridValidRowModel,
+} from '@mui/x-data-grid';
 
 import useHeroes from '@hooks/useHeroes';
 
 import { AppRoutePathnames } from '@config/constants';
-import { DataSetInfo } from '@api/rick-and-morty/types';
+import { DataSetInfo, HeroData } from '@api/rick-and-morty/types';
 
 import DataGrid from '@components/ui/DataGrid';
 
 const ROWS_PER_PAGE = 20;
 
-const columns = [
+type MuiGridColDef<T extends GridValidRowModel> = GridColDef<T> & { field: keyof T };
+
+type HeroGridData = Partial<HeroData>;
+
+const columns: MuiGridColDef<HeroGridData>[] = [
   { field: 'id', headerName: 'ID', minWidth: 100 },
   {
     field: 'name',
@@ -40,9 +49,13 @@ export default function HeroesPage() {
 
   const { data, loading } = useHeroes(currentPage);
 
-  const rows = useMemo(() => {
+  const rows: HeroGridData[] = useMemo(() => {
     if (!data) {
-      return Array.from({ length: ROWS_PER_PAGE }, (_, index) => ({ id: index }));
+      return Array.from({ length: ROWS_PER_PAGE }, (_, index) => ({
+        id: index,
+        name: '',
+        status: '',
+      }));
     }
     return data.results.map(({ id, name, status }) => ({ id, name, status }));
   }, [data]);

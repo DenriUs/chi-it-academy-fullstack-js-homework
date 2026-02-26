@@ -1,0 +1,26 @@
+{
+  "name": "lecture-12",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "src/app.ts",
+  "scripts": {
+    "dev": "tsx --watch src/app.ts",
+    "build": "tsdown src/app.ts",
+    "start": "node dist/app.mjs"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "reflect-metadata": "^0.2.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.3.0",
+    "tsdown": "^0.20.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

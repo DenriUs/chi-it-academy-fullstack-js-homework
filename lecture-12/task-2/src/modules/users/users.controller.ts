@@ -9,11 +9,11 @@ import {
   OnUndefined,
 } from 'routing-controllers';
 
-import { UserEntity } from '@/modules/users/entities/user.entity';
-import { usersService } from '@/modules/users/users.service';
-
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+
+import { UserEntity } from './entities/user.entity';
+import { usersService } from './users.service';
 
 @JsonController('/users')
 export class UserController {

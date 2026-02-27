@@ -1,10 +1,13 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindOptionsWhere, Repository } from 'typeorm';
 import { PostEntity } from '../entities/post.entity';
 import { ERROR_MESSAGES } from 'src/common/constants';
 import { UserEntity } from '../../users/entities/user.entity';
-import { InternalServerError } from 'routing-controllers';
 import { CommentEntity } from '../entities/comment.entity';
 import { PostsService } from './posts.service';
 
@@ -23,18 +26,18 @@ export class CommentsService {
   ): Promise<CommentEntity> {
     return this.commentEntityRepository.manager.transaction(async () => {
       const post = await this.postsService.getOne(findOptionsWhere);
-      console.log(post);
       const entity = this.commentEntityRepository.create({
         ...entityLike,
         post,
         user,
       });
-      console.log(entity);
       const { id } = await this.commentEntityRepository
         .save(entity)
         .catch((error) => {
           console.log(error);
-          throw new InternalServerError(ERROR_MESSAGES.internalServerError);
+          throw new InternalServerErrorException(
+            ERROR_MESSAGES.internalServerError,
+          );
         });
       return this.getOne({ id });
     });
@@ -54,7 +57,7 @@ export class CommentsService {
   }
 
   public async getMany(
-    findOptionsWhere: FindOptionsWhere<PostEntity>,
+    findOptionsWhere: FindOptionsWhere<CommentEntity>,
     user?: Partial<UserEntity>,
   ): Promise<CommentEntity[]> {
     return this.commentEntityRepository
@@ -76,7 +79,9 @@ export class CommentsService {
       user,
     );
     return this.commentEntityRepository.remove(entity).catch(() => {
-      throw new InternalServerError(ERROR_MESSAGES.internalServerError);
+      throw new InternalServerErrorException(
+        ERROR_MESSAGES.internalServerError,
+      );
     });
   }
 }

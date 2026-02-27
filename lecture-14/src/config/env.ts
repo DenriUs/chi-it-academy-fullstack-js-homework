@@ -1,6 +1,6 @@
 import { config } from 'dotenv';
 
-config();
+config({ quiet: true });
 
 const {
   SERVER_URL,

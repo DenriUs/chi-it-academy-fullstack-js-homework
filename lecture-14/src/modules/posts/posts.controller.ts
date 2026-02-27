@@ -28,6 +28,7 @@ import { CommentEntity } from './entities/comment.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { PaginatedResultDto } from 'src/common/dto/paginated-response.dto';
+import { DeleteOneCommentDto } from './dto/delete-one-comment.dto';
 
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 
@@ -36,13 +37,13 @@ const ALLOWED_IMAGE_TYPES_REGEX = /^image\/(png|jpeg|jpg)$/;
 const IMAGES_FOLDER = 'uploads';
 
 @Controller('posts')
-@ForAuthorized()
 export class PostsController {
   constructor(
     private readonly postsService: PostsService,
     private readonly commentsService: CommentsService,
   ) {}
 
+  @ForAuthorized()
   @Post()
   @UseInterceptors(
     FileInterceptor('image', {
@@ -86,27 +87,7 @@ export class PostsController {
     return this.postsService.createOne({ ...createPostDto, imageUrl }, user);
   }
 
-  @Get(':id')
-  public async getOne(@Param() id: Id): Promise<PostEntity> {
-    return this.postsService.getOne(id);
-  }
-
-  @Get()
-  public async getMany(
-    @Query('page') page: number,
-    @Query('limit') limit: number,
-  ): Promise<PaginatedResultDto<PostEntity>> {
-    return this.postsService.getMany({}, { page, limit });
-  }
-
-  @Delete(':id')
-  public async deleteOne(
-    @Param() id: Id,
-    @User() user: UserEntity,
-  ): Promise<PostEntity> {
-    return this.postsService.deleteOne(id, user);
-  }
-
+  @ForAuthorized()
   @Get('my-posts')
   public async getManyForCurrentUser(
     @Query('page') page: number,
@@ -116,6 +97,21 @@ export class PostsController {
     return this.postsService.getMany({}, { page, limit }, user);
   }
 
+  @Get(':id')
+  public async getOne(@Param() id: Id): Promise<PostEntity> {
+    return this.postsService.getOne(id);
+  }
+
+  @ForAuthorized()
+  @Delete(':id')
+  public async deleteOne(
+    @Param() id: Id,
+    @User() user: UserEntity,
+  ): Promise<PostEntity> {
+    return this.postsService.deleteOne(id, user);
+  }
+
+  @ForAuthorized()
   @Post(':id/comments')
   public async createOneComment(
     @Param() id: Id,
@@ -126,16 +122,20 @@ export class PostsController {
   }
 
   @Get(':id/comments')
-  public async getManyComments(@Param() id: Id): Promise<CommentEntity[]> {
-    return this.commentsService.getMany(id);
+  public async getManyComments(@Param() { id }: Id): Promise<CommentEntity[]> {
+    return this.commentsService.getMany({ postId: id });
   }
 
+  @ForAuthorized()
   @Delete(':postId/comments/:commentId')
   public async deleteOneComment(
-    @Param(':postId') postId: Id,
-    @Param(':commentId') commentId: Id,
+    @Param() { postId, commentId }: DeleteOneCommentDto,
     @User() user: UserEntity,
   ): Promise<CommentEntity> {
-    return this.commentsService.deleteOne(postId, commentId, user);
+    return this.commentsService.deleteOne(
+      { id: postId },
+      { id: commentId },
+      user,
+    );
   }
 }

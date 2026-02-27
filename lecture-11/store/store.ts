@@ -3,7 +3,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import userReducer from './slices/user.slice';
 import { accessTokenMiddleware } from './middlewares/access-token.middleware';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   user: userReducer,
 });
 

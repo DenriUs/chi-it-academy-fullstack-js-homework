@@ -7,10 +7,19 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# dependencies
 node_modules
+
+# testing
+/coverage
+
+# next.js
+.next/
+/out/
+
+# production
+build
 dist
-dist-ssr
-*.local
 
 .next
 
@@ -26,5 +35,15 @@ dist-ssr
 *.sln
 *.sw?
 
-db.txt
+# env files
 .env
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+db.txt
+*.local

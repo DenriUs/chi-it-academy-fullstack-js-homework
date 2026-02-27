@@ -1,10 +1,13 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindOptionsWhere, Repository } from 'typeorm';
 import { PostEntity } from '../entities/post.entity';
 import { ERROR_MESSAGES } from 'src/common/constants';
 import { UserEntity } from '../../users/entities/user.entity';
-import { InternalServerError } from 'routing-controllers';
 import { PaginationDto } from '../dto/posts-pagination.dto';
 import { PaginatedResultDto } from 'src/common/dto/paginated-response.dto';
 
@@ -25,7 +28,9 @@ export class PostsService {
         .save(entity)
         .catch((error) => {
           console.log(error);
-          throw new InternalServerError(ERROR_MESSAGES.internalServerError);
+          throw new InternalServerErrorException(
+            ERROR_MESSAGES.internalServerError,
+          );
         });
       return this.getOne({ id });
     });
@@ -73,7 +78,9 @@ export class PostsService {
   ): Promise<PostEntity> {
     const entity = await this.getOne(findOptionsWhere, user);
     return this.postEntityRepository.remove(entity).catch(() => {
-      throw new InternalServerError(ERROR_MESSAGES.internalServerError);
+      throw new InternalServerErrorException(
+        ERROR_MESSAGES.internalServerError,
+      );
     });
   }
 }

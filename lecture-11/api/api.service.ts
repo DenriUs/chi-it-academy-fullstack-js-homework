@@ -35,7 +35,7 @@ export class ApiService {
       headers: {
         ...this.config.headers,
         ...config?.headers,
-        ...(isBodyPresent && { 'Content-Type': 'application/json' }),
+        ...(isBodyPresent && !isFormData && { 'Content-Type': 'application/json' }),
       },
       ...(isBodyPresent && { body: isFormData ? data : JSON.stringify(data) }),
     };

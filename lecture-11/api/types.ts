@@ -1,5 +1,3 @@
-import type { HttpStatusCode } from 'axios';
-
 export type Methods = 'get' | 'post' | 'delete';
 
 export type FetchConfig = RequestInit & {
@@ -19,7 +17,7 @@ export type MakeRequestArgs = {
 export type ResponseError = {
   message: string;
   error: string;
-  statusCode: HttpStatusCode;
+  statusCode: number;
 };
 
 export type PaginatedResponse<T> = {
